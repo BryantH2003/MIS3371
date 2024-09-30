@@ -1,0 +1,182 @@
+/* 
+Program name: patient-form.html
+Author: Bryant Huynh
+Date created: 9/4/2024
+Date last edited: 9/4/2024
+Version: 1.0
+Description: Base HTML file for the patient form. */
+
+/*Sets main font and color of the page*/
+body {
+    font-family: 'Comfortaa';
+    background-color: #caf0f8;
+    margin: 0;
+ }
+
+ p {
+  margin: 0;
+ }
+
+ h3 {
+  margin-top: 0;
+  margin-bottom: 0;
+  padding: 5px 0 5px 0;
+ }
+
+ input {
+    font-family: 'Comfortaa';
+ }
+
+ select {
+    font-family: 'Comfortaa';
+    padding: 5px;
+ }
+
+ textarea {
+  font-family: 'Comfortaa';
+  font-size: small;
+ }
+
+/* Top banner of the page */
+ body .header {
+  display: flex;
+  flex-direction: row;
+  background-color: #03045e;
+  justify-content: center;
+ }
+
+/* Text of the banner */
+ body .header .header-text {
+  display: flex;
+  text-align: center;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  color: white;
+ }
+
+/* Sets height and width of the image in banner */
+ body .header img {
+  width: 150px;
+  height: 150px;
+  border-radius: 15px;
+  margin: 1rem;
+ }
+
+/* Div wrapper for main body of the page */
+ body .main-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 3vh;
+    margin-bottom: 3vh;
+ }
+
+/* Adds coloring and spacing to the form */
+ body .main-content form {
+  padding: 1rem;
+  background-color: #0096c7;
+  border-radius: 15px;
+ }
+
+/* Background color of the tables */
+  body .main-content form table {
+  width: 100%;
+  background-color: #E3EDF8;
+  }
+
+/* Heading of the separate sections of the form */
+ body .main-content .form-heading {
+  background-color: #023e8a;
+  color: white;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  padding: 1vw 1vh;
+ }
+
+
+ body .main-content form .form-content {
+  background-color: white;
+ }
+
+/* Row in the form */
+ .main-content .form-row {
+   display: flex;
+   flex-direction: row;
+   justify-content: space-around;
+ }
+
+/* Elements in the form */
+ .main-content .form-element {
+   display: flex;
+   flex-direction: column;
+   margin: 0vh 1vw 1vh 1vw;
+ }
+
+  .main-content .radio-form-element {
+   display: flex;
+   margin: 0vh 1vw 1vh 1vw;
+   justify-content: center;
+   font-size: small;
+ }
+
+  .main-content .checkbox-form-element {
+   display: flex;
+   margin: 0vh 1vw 1vh 1vw;
+   font-size: small;
+ }
+
+  .main-content .form-element label{
+   display: flex;
+   flex-direction: row;
+   font-size: small;
+ }
+
+ .main-content .form-element p {
+   margin: 0;
+   color: red;
+ }
+
+  .main-content .form-element input {
+   border-radius: 5px;
+   border: 1px lightgray solid;
+   padding: 5px;
+ }
+
+   .main-content .form-element select {
+   border-radius: 5px;
+   border: 1px lightgray solid;
+ }
+
+ .main-content form input::placeholder {
+    font-family: 'Comfortaa';
+ }
+
+ body .footer {
+  background-color: #03045e;
+ }
+
+ body .footer .footer-content {
+  display: flex;
+  justify-content: center;
+  color: white;
+  padding: 2vh 2vw 2vh 2vw;
+  flex-direction: column;
+ }
+
+ body .footer .footer-content .footer-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+ }
+
+  body .footer .footer-content .footer-row a{
+  color: white;
+ }
+
+ body .footer .footer-content .footer-row img{
+  width: 80px;
+  height: 80px;
+  margin: 5px 5px;
+ }
