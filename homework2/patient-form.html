@@ -45,9 +45,20 @@ Description: Base HTML file for the patient form.
                     </div>
                     <tr>
                         <!-- First Name -->
-                        <td class="form-element">
-                            <label for="firstName">First Name <p>*</p> </label>
-                            <input required type="text" id="firstName" name="firstname" value="" maxlength="30" placeholder="First Name">
+                        <td>
+                            <div class="form-element"> 
+                                <label for="firstName">First Name <p>*</p> </label>
+                                <input 
+                                    required type="text" 
+                                    id="firstName" 
+                                    name="firstname" 
+                                    value="" 
+                                    maxlength="30" 
+                                    placeholder="First Name" 
+                                    onblur="validateFirstName()"
+                                >
+                                <div id="firstNameValidator"></div>
+                            </div>
                         </td>
                         <!-- Middle Intitial -->
                         <td>

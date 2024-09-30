@@ -180,3 +180,7 @@ body {
   height: 80px;
   margin: 5px 5px;
  }
+
+ .error-message {
+  font-size: 10px;
+ }
