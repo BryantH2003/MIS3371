@@ -10,6 +10,7 @@ Description: Base HTML file for the patient form.
 <html>
     <!-- Loading form validation javascript -->
     <script src="form-validation.js"></script>
+    <script src="review-data.js"></script>
     
     <head>
         <meta charset="utf-8">
@@ -35,7 +36,7 @@ Description: Base HTML file for the patient form.
         
         <div class="main-content">
             <!--This is the main code for the patient form-->
-            <form name="patient-form" action="thankyou.html" onsubmit="return validateForm()">
+            <form id="patient-form" name="patient-form" action="thankyou.html" onsubmit="return validateForm()">
 
                 <!-- This is the portion of the form responsible for Patient Information -->
                 <table>
@@ -49,13 +50,17 @@ Description: Base HTML file for the patient form.
                             <div class="form-element"> 
                                 <label for="firstName">First Name <p>*</p> </label>
                                 <input 
-                                    required type="text" 
+                                    required 
+                                    type="text" 
                                     id="firstName" 
-                                    name="firstname" 
+                                    name="firstName" 
                                     value="" 
                                     maxlength="30" 
-                                    placeholder="First Name" 
-                                    onblur="validateFirstName()"
+                                    placeholder="First Name"
+                                    pattern="[A-Za-z]{1,30}" 
+                                    onblur="validateName(name)"
+                                    onkeydown="return /([A-za-z'-])/i.test(event.key)"
+                                    title="This field only accepts alphabetic letters, apostrphes, and dashes."
                                 >
                                 <div id="firstNameValidator"></div>
                             </div>
@@ -64,14 +69,37 @@ Description: Base HTML file for the patient form.
                         <td>
                             <div class="form-element">
                                 <label for="firstName">Middle Initial</label>
-                                <input type="text" id="middleInit" name="middleInit" value="" maxlength="1" placeholder="Middle Initial">
+                                <input 
+                                    type="text" 
+                                    id="middleInit" 
+                                    name="middleInit" 
+                                    value="" 
+                                    maxlength="1" 
+                                    placeholder="Middle Initial"
+                                    pattern="[A-Za-z]{1}" 
+                                    onkeydown="return /([A-za-z])/i.test(event.key)"
+                                    title="This field only accepts alphabetic letters."
+                                >
                             </div>
                         </td>
                         <!-- Last Name -->
                         <td>
                             <div class="form-element">
                                 <label for="lastName">Last Name <p>*</p> </label>
-                                <input required type="text" id="lastName" name="lastName" value="" maxlength="30" placeholder="Last Name">
+                                <input 
+                                    required 
+                                    type="text" 
+                                    id="lastName" 
+                                    name="lastName" 
+                                    value="" 
+                                    maxlength="30" 
+                                    placeholder="Last Name"
+                                    onblur="validateName(name)"
+                                    pattern="[A-Za-z]{1,30}" 
+                                    onkeydown="return /([A-Za-z'-]|[2-5])/i.test(event.key)"
+                                    title="This field only accepts alphabetic letters, numbers 2-5, apostrphes, and dashes."
+                                >
+                                <div id="lastNameValidator"></div>
                             </div>
                         </td>
                     </tr>
@@ -82,7 +110,18 @@ Description: Base HTML file for the patient form.
                             <!-- Email -->
                             <div class="form-element">
                                 <label for="email">Email<p>*</p> </label>
-                                <input required type="text" id="email" name="email" value="" placeholder="email@domain.tld">
+                                <input 
+                                    required 
+                                    type="text" 
+                                    id="email" 
+                                    name="email" 
+                                    value="" 
+                                    placeholder="email@domain.tld"
+                                    title="Please enter your email address."
+                                    onblur="validateEmail(name)"
+                                    pattern="[^@\s]+@[^@\s]+\.[^@\s]+"
+                                >
+                                <div id="emailValidator"></div>
                             </div>
                         </td>
                     </tr>
@@ -93,7 +132,20 @@ Description: Base HTML file for the patient form.
                             <!-- User ID -->
                             <div class="form-element">
                                 <label for="userID">User ID<p>*</p> </label>
-                                <input required type="text" id="userID" name="userID" value="" maxlength="20" placeholder="User ID">
+                                <input 
+                                    required 
+                                    type="text" 
+                                    id="userID" 
+                                    name="userID" 
+                                    value="" 
+                                    maxlength="20" 
+                                    placeholder="User ID"
+                                    onblur="validateUserID()"
+                                    oninput="validateUserID()"
+                                    pattern="^[A-Za-z][A-Za-z0-9_-]*$"
+                                    title="User ID can only consist of letters, numbers, underscore, or dashes."
+                                >
+                                <div id="userIDValidator"></div>
                             </div>
                         </td>
                     </tr>
@@ -104,14 +156,40 @@ Description: Base HTML file for the patient form.
                             <!-- Password -->
                             <div class="form-element">
                                 <label for="password">Password<p>*</p> </label>
-                                <input required type="password" type="text" id="password" name="password" value="" placeholder="Password">
+                                <input 
+                                    required 
+                                    type="password" 
+                                    type="text" 
+                                    id="password" 
+                                    name="password" 
+                                    minlength="8"
+                                    maxlength="30"
+                                    value="" 
+                                    placeholder="Password"
+                                    title="Your password requires an uppercase letter, a number, and a special character."
+                                    oninput="validatePassword()"
+                                >
+                                <div id="passwordValidator"></div>
                             </div>
                         </td>
                         <td>
                             <!-- Confirm Password -->
                             <div class="form-element">
                                 <label for="confirmPassword">Confirm Password<p>*</p> </label>
-                                <input required type="password" type="text" id="confirmPassword" name="confirmPassword" value="" placeholder="Confirm Password">
+                                <input 
+                                    required 
+                                    type="password" 
+                                    type="text" 
+                                    id="confirmPassword" 
+                                    name="confirmPassword" 
+                                    minlength="8" 
+                                    maxlength="30" 
+                                    value="" 
+                                    placeholder="Confirm Password"
+                                    title="Confirm your password."
+                                    onblur="validateConfirmPassword()"
+                                >
+                                <div id="confirmPasswordValidator"></div>
                             </div>
                         </td>
                     </tr>
@@ -122,21 +200,54 @@ Description: Base HTML file for the patient form.
                             <!-- SSN -->
                             <div class="form-element">
                                 <label for="socialSecurity">SSN<p>*</p> </label>
-                                <input required type="password" pattern="\d{3}-\d{2}-\d{4}" id="socialSecurity" name="socialSecurity" value="" minlength="9" maxlength="11" placeholder="XXX-XX-XXXX">
+                                <input 
+                                    required 
+                                    type="password" 
+                                    pattern="\d{3}-\d{2}-\d{4}" 
+                                    id="socialSecurity" 
+                                    name="socialSecurity" 
+                                    value="" 
+                                    minlength="9" 
+                                    maxlength="11" 
+                                    placeholder="XXX-XX-XXXX"
+                                    title="Enter your social security number."
+                                >
                             </div>
                         </td>
                         <td> 
                             <!-- Date of Birth -->
                             <div class="form-element">
                                 <label for="birthDate">Date of Birth<p>*</p> </label>
-                                <input required type="date" type="text" id="birthDate" name="birthDate" value="" placeholder="MM/DD/YYYY">
+                                <input 
+                                    required 
+                                    type="date" 
+                                    type="text" 
+                                    id="birthDate" 
+                                    name="birthDate" 
+                                    value="" 
+                                    placeholder="MM/DD/YYYY"
+                                    onblur="validateDate()"
+                                    title="Select your birthdate."
+                                >
+                                <div id="birthDateValidator"></div>
                             </div>
                         </td>
                         <td>
                             <!-- Phone Number -->
                             <div class="form-element">
                                 <label for="phoneNumber">Phone Number<p>*</p> </label>
-                                <input required type="tel" id="phoneNumber" name="phoneNumber" value="" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="XXX-XXX-XXXX" minlength="10" maxlength="12">
+                                <input 
+                                    required 
+                                    type="tel" 
+                                    id="phoneNumber" 
+                                    name="phoneNumber" 
+                                    value="" 
+                                    pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" 
+                                    placeholder="XXX-XXX-XXXX" 
+                                    minlength="10" 
+                                    maxlength="12"
+                                    title="Please enter formated phone number"
+                                >
                             </div>
                         </td>
                     </tr>
@@ -180,7 +291,17 @@ Description: Base HTML file for the patient form.
                             <!-- Address 1 -->
                             <div class="form-element">
                                 <label for="address1">Address<p>*</p> </label>
-                                <input required type="address1" type="text" id="address1" name="address1" value="" maxlength="30" placeholder="Main Address">
+                                <input 
+                                    required 
+                                    type="address1" 
+                                    type="text" 
+                                    id="address1" 
+                                    name="address1" 
+                                    value="" 
+                                    maxlength="30" 
+                                    placeholder="Main Address"
+                                    title="Enter your main address."
+                                >
                             </div>
                         </td>
                     </tr>
@@ -191,7 +312,16 @@ Description: Base HTML file for the patient form.
                             <!-- Address 2 -->
                             <div class="form-element">
                                 <label for="address2">Secondary Address </label>
-                                <input type="address2" type="text" id="address2" name="address2" value="" maxlength="30" placeholder="Secondary Address">
+                                <input 
+                                    type="address2" 
+                                    type="text" 
+                                    id="address2" 
+                                    name="address2" 
+                                    value="" 
+                                    maxlength="30" 
+                                    placeholder="Secondary Address"
+                                    title="Enter your secondary address."
+                                >
                             </div>
                         </td>
                     </tr>
@@ -201,7 +331,13 @@ Description: Base HTML file for the patient form.
                         <!-- State -->
                         <td class="form-element">
                             <label for="state">State <p>*</p> </label>
-                            <select required id="state">
+                            <select 
+                                required 
+                                id="state" 
+                                name="state"
+                                oninput="validateState()"
+                                title="Please select your state."
+                            >
                                 <option></option>
                                 <option value="AL">Alabama</option>
                                 <option value="AK">Alaska</option>
@@ -256,19 +392,44 @@ Description: Base HTML file for the patient form.
                                 <option value="WI">Wisconsin</option>
                                 <option value="WY">Wyoming</option>
                             </select>
+                            <div id="stateValidator"></div>
                         </td>
                         <td>
                             <!-- City -->
                             <div class="form-element">
                                 <label for="city">City <p>*</p> </label>
-                                <input required type="text" id="city" name="city" value="" maxlength="30" placeholder="City">
+                                <input 
+                                    required 
+                                    type="text" 
+                                    id="city" 
+                                    name="city" 
+                                    value="" 
+                                    maxlength="30" 
+                                    placeholder="City"
+                                    title="Select your current city."
+                                    onblur="validateCity()"
+                                >
+                                <div id="cityValidator"></div>
                             </div>
                         </td>
                         <td>
                             <!-- Zip Code -->
                             <div class="form-element">
                                 <label for="zipCode">Zip Code <p>*</p> </label>
-                                <input required type="text" id="zipCode" name="zipCode" value="" minlength="5" maxlength="10" placeholder="Zip Code">
+                                <input 
+                                    required 
+                                    type="text" 
+                                    id="zipCode" 
+                                    name="zipCode" 
+                                    value="" 
+                                    minlength="5" 
+                                    maxlength="10" 
+                                    placeholder="Zip Code"
+                                    title="Enter your zipcode."
+                                    pattern="[0-9]"
+                                    onblur="validateZip()"
+                                >
+                                <div id="zipCodeValidator"></div>
                             </div>
                         </td>
                     </tr>
@@ -289,19 +450,45 @@ Description: Base HTML file for the patient form.
                             <td>
                                 <div class="form-element">
                                     <label for="emergContactFirstName">Contact First Name </label>
-                                    <input type="text" id="emergContactFirstName" name="emergContactFirstName" value="" placeholder="First Name">
+                                    <input 
+                                        type="text" 
+                                        id="emergContactFirstName" 
+                                        name="emergContactFirstName" 
+                                        value="" 
+                                        placeholder="First Name"
+                                        pattern="[A-Za-z]{1,30}" 
+                                        onkeydown="return /([A-za-z'-])/i.test(event.key)"
+                                        title="This field only accepts alphabetic letters, apostrphes, and dashes."
+                                    >
                                 </div>
                             </td>
                             <td>
                                 <div class="form-element">
                                     <label for="emergContactMiddle">Contact Middle Initial </label>
-                                    <input type="text" id="emergContactMiddle" name="emergContactMiddle" value="" placeholder="Middle Initial">
+                                    <input 
+                                        type="text" 
+                                        id="emergContactMiddle" 
+                                        name="emergContactMiddle" 
+                                        value="" 
+                                        placeholder="Middle Initial"
+                                        onkeydown="return /([A-za-z])/i.test(event.key)"
+                                        title="This field only accepts alphabetic letters."
+                                    >
                                 </div>
                             </td>
                             <td>
                                 <div class="form-element">
                                     <label for="emergContactLastName">Contact Last Name </label>
-                                    <input type="text" id="emergContactLastName" name="emergContactLastName" value="" placeholder="Last Name">
+                                    <input 
+                                        type="text" 
+                                        id="emergContactLastName" 
+                                        name="emergContactLastName" 
+                                        value="" 
+                                        placeholder="Last Name"
+                                        pattern="[A-Za-z]{1,30}" 
+                                        onkeydown="return /([A-za-z'-])/i.test(event.key)"
+                                        title="This field only accepts alphabetic letters, apostrphes, and dashes."
+                                    >
                                 </div>
                             </td>
                         </tr>
@@ -311,7 +498,14 @@ Description: Base HTML file for the patient form.
                             <!-- Emergency Contact Email -->
                             <div class="form-element">
                                 <label for="emergContactEmail">Contact Email </label>
-                                <input type="text" id="emergContactEmail" name="emergContactEmail" value="" placeholder="email@domain.tld">
+                                <input 
+                                    type="text" 
+                                    id="emergContactEmail" 
+                                    name="emergContactEmail" 
+                                    value="" 
+                                    placeholder="email@domain.tld"
+                                    title="Enter a valid email address."
+                                >
                             </div>
                         </td>
                     </table>
@@ -321,14 +515,28 @@ Description: Base HTML file for the patient form.
                             <td>
                                 <div class="form-element">
                                     <label for="emergContactPhoneNumber">Contact Phone Number </label>
-                                    <input type="text" id="emergContactPhoneNumber" name="emergContactPhoneNumber" value="" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="XXX-XXX-XXXX">
+                                    <input 
+                                        type="text" 
+                                        id="emergContactPhoneNumber" 
+                                        name="emergContactPhoneNumber" 
+                                        value="" 
+                                        pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" 
+                                        placeholder="XXX-XXX-XXXX"
+                                        title="Enter properly formatted phone number."
+                                    >
                                 </div>
                             </td>
                             <td>
                                 <!-- Contact Relation -->
                                 <div class="form-element">
                                     <label for="emergContactRelation">Relation To Patient </label>
-                                    <input type="text" id="emergContactRelation" name="emergContactRelation" value="" placeholder="Relation">
+                                    <input 
+                                        type="text" 
+                                        id="emergContactRelation" 
+                                        name="emergContactRelation" 
+                                        value="" placeholder="Relation"
+                                        title="Enter the contact's relation to you."
+                                    >
                                 </div>
                             </td>
                         </tr>
@@ -358,14 +566,28 @@ Description: Base HTML file for the patient form.
                             <td>
                                 <!-- Yes Option -->
                                 <div class="radio-form-element">
-                                    <input type="radio" id="hasInsurance" name="hasInsurance" value="hasInsurance">
+                                    <input 
+                                        required 
+                                        type="radio" 
+                                        id="hasInsurance" 
+                                        name="hasInsurance" 
+                                        value="hasInsurance"
+                                        title="Please select whether or not you have insurance."
+                                    >
                                     <label for="hasInsurance">Yes</label>
                                 </div>
                             </td>
                             <td>
                                 <!-- No Option -->
                                 <div class="radio-form-element">
-                                    <input type="radio" id="notHasInsurance" name="hasInsurance" value="notHasInsurance">
+                                    <input 
+                                        required 
+                                        type="radio" 
+                                        id="notHasInsurance" 
+                                        name="hasInsurance" 
+                                        value="notHasInsurance"
+                                        title="Please select whether or not you have insurance."
+                                    >
                                     <label for="notHasInsurance">No</label>
                                 </div>
                             </td>
@@ -376,7 +598,14 @@ Description: Base HTML file for the patient form.
                             <!-- Insurance Plan Name -->
                             <div class="form-element">
                                 <label for="insurancePlan">Insurance Plan Name </label>
-                                <input type="text" id="insurancePlan" name="insurancePlan" value="" placeholder="Insurance Plan Name">
+                                <input 
+                                    type="text" 
+                                    id="insurancePlan" 
+                                    name="insurancePlan" 
+                                    value="" 
+                                    placeholder="Insurance Plan Name"
+                                    title="Enter your insurance plan name."
+                                >
                             </div>
                         </td>
                     </table>
@@ -385,7 +614,7 @@ Description: Base HTML file for the patient form.
                             <!-- Insurance Type -->
                             <td class="form-element">
                                 <label for="insuranceType">Insurance Type </label>
-                                <select id="insuranceType">
+                                <select name="insuranceType" id="insuranceType">
                                     <option></option>
                                     <option value="PPO">PPO</option>
                                     <option value="EPO">EPO</option>
@@ -400,14 +629,30 @@ Description: Base HTML file for the patient form.
                                 <!-- Insurance Member ID -->
                                 <div class="form-element">
                                     <label for="insuranceMemID">Member ID </label>
-                                    <input type="text" id="insuranceMemID" name="insuranceMemID" value="" maxlength="15" placeholder="Member ID">
+                                    <input 
+                                        type="text" 
+                                        id="insuranceMemID" 
+                                        name="insuranceMemID" 
+                                        value="" 
+                                        maxlength="15" 
+                                        placeholder="Member ID"
+                                        title="Enter you insurance member ID."
+                                        >
                                 </div>
                             </td>
                             <td>
                                 <!-- Insurance Group Number -->
                                 <div class="form-element">
                                     <label for="groupNumber">Group Number </label>
-                                    <input type="text" id="groupNumber" name="groupNumber" value="" maxlength="15" placeholder="Group Number">
+                                    <input 
+                                        type="text" 
+                                        id="groupNumber" 
+                                        name="groupNumber" 
+                                        value="" 
+                                        maxlength="15" 
+                                        placeholder="Group Number"
+                                        title="Enter you insurance group number."
+                                    >
                                 </div>
                             </td>
                         </tr>
@@ -437,14 +682,27 @@ Description: Base HTML file for the patient form.
                             <td>
                                 <!-- Yes Option -->
                                 <div class="radio-form-element">
-                                    <input type="radio" id="hasVaccination" name="hasVaccination" value="hasVaccination">
+                                    <input 
+                                        required 
+                                        type="radio" 
+                                        id="hasVaccination" 
+                                        name="hasVaccination" 
+                                        value="hasVaccination"
+                                        title="Enter whether or not you have vaccinated."
+                                    >
                                     <label for="hasVaccination">Yes</label>
                                 </div>
                             </td>
                             <td>
                                 <!-- No Option -->
                                 <div class="radio-form-element">
-                                    <input type="radio" id="notHasVaccination" name="hasVaccination" value="notHasVaccination">
+                                    <input 
+                                        type="radio" 
+                                        id="notHasVaccination" 
+                                        name="hasVaccination" 
+                                        value="notHasVaccination"
+                                        title="Enter whether or not you have vaccinated."
+                                    >
                                     <label for="notHasVaccination">No</label>
                                 </div>
                             </td>
@@ -464,7 +722,7 @@ Description: Base HTML file for the patient form.
                         <tr>
                             <td>
                                 <div class="checkbox-form-element">
-                                    <input type="checkbox" id="chickenPox" name="chickenPox" value="chickenPoxike">
+                                    <input type="checkbox" id="chickenPox" name="chickenPox" value="chickenPox">
                                     <label for="chickenPox">Chicken Pox</label>
                                 </div>
                                 <div class="checkbox-form-element">
@@ -492,7 +750,13 @@ Description: Base HTML file for the patient form.
                                 <!-- Describing symptom area -->
                                 <div class="form-element">
                                     <label for="healtDescription">Describe any symptoms you may have </label>
-                                    <textarea id="healtDescription" name="healtDescription" rows="3" cols="50"></textarea>
+                                    <textarea 
+                                        id="healthDescription" 
+                                        name="healthDescription" 
+                                        rows="3" 
+                                        cols="50"
+                                        title="Enter any symptoms you may have."
+                                    ></textarea>
                                 </div>
                             </td>
                         </tr>
@@ -501,15 +765,23 @@ Description: Base HTML file for the patient form.
                                 <!-- Slider Bar -->
                                 <div class="form-element">
                                     <label for="sliderInput">Rate how you are feeling (1 - Very bad / 10 - Feeling Good)
-                                        <p>
+                                        <!-- <p>
                                             : 
-                                            <output id:"sliderValue">
-                                            </output>
-                                        </p>
+                                            <output id="sliderValue"></output>
+                                        </p> -->
                                     </label>
-                                    <input type="range" id="sliderInput" name="healthSlider" min="1" max="10" step="1" list="markers"/>
+                                    <input 
+                                        type="range" 
+                                        id="sliderInput" 
+                                        name="healthSlider" 
+                                        min="1" 
+                                        max="10" 
+                                        step="1" 
+                                        list="markers"
+                                        oninput="displayInput()"
+                                    />
                                     <datalist id="markers">
-                                        <option value="1"</option>
+                                        <option value="1"></option>
                                         <option value="2"></option>
                                         <option value="3"></option>
                                         <option value="4"></option>
@@ -529,10 +801,13 @@ Description: Base HTML file for the patient form.
                 <br>
 
                 <div class="form-row">
+                    <input type="button" value="Review Data" onclick="viewData()">
                     <input type="reset" value="Clear Form">
                     <input type="submit" value="Submit">
                 </div>
             </form>
+
+            <div class="review-data-table" id="view-data"></div>
         </div>
 
         <!-- Footer  -->

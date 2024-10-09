@@ -184,3 +184,19 @@ body {
  .error-message {
   font-size: 10px;
  }
+
+ body .main-content .review-data-table {
+  border-radius: 15px;
+  margin: 5rem 0 5rem 0;
+  width: 35vw;
+  background-color: #43bb73;
+ }
+
+.review-data-table table {
+  display: flex;
+}
+
+.review-data-table tr {
+  margin: 1vh 1vw;
+  display: flex;
+}
