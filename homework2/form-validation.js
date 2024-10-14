@@ -1,4 +1,4 @@
-// Validation for Name Fields
+// Validation for Name Fields if empty
 function validateName (fieldName) {
     let firstname = document.forms["patient-form"][fieldName].value;
     let valildator = fieldName + "Validator";
@@ -15,6 +15,7 @@ function validateName (fieldName) {
     return true;
 }
 
+// Validation for Emmail fields if empty
 function validateEmail (fieldName) {
     let email = document.forms["patient-form"][fieldName].value;
     let valildator = fieldName + "Validator";
@@ -31,6 +32,7 @@ function validateEmail (fieldName) {
     return true;
 }
 
+// Validation for User ID field
 function validateUserID () {
     let userID = document.forms["patient-form"]["userID"].value;
     let specialCharTest = /[^a-zA-Z0-9_-]/;
@@ -61,6 +63,7 @@ function validateUserID () {
     }
 }
 
+// Validation for Date fields
 function validateDate () {
     let today = new Date();
     let selectedDate = new Date(document.forms["patient-form"]["birthDate"].value);
@@ -81,6 +84,7 @@ function validateDate () {
 
 }
 
+// Validation for first password field
 function validatePassword () {
     let password = document.forms["patient-form"]["password"].value;
     let userID = document.forms["patient-form"]["userID"].value;
@@ -122,6 +126,7 @@ function validatePassword () {
     }
 }
 
+// Validation for confirmation of password
 function validateConfirmPassword () {
     let confirmPassword = document.forms["patient-form"]["confirmPassword"].value;
     let password = document.forms["patient-form"]["password"].value;
@@ -141,6 +146,7 @@ function validateConfirmPassword () {
     }
 }
 
+// Validation for state field
 function validateState () {
     let state = document.forms["patient-form"]["state"].value;
 
@@ -155,6 +161,7 @@ function validateState () {
     }
 }
 
+// Validation for city field if empty
 function validateCity () {
     let city = document.forms["patient-form"]["city"].value;
 
@@ -183,12 +190,14 @@ function validateZip () {
     }
 }
 
+// Display slider input
 function displayInput () {
     let sliderInput = document.forms["patient-form"]["healthSlider"].value;
 
     document.getElementById("sliderValue").innerHTML = sliderInput;
 }
 
+// Helper function to check if a character is a number or not
 function checkNumeric (character) {
     if (character >= '0' && character <= '9') {
         return true

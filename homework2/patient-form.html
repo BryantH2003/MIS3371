@@ -57,7 +57,7 @@ Description: Base HTML file for the patient form.
                                     value="" 
                                     maxlength="30" 
                                     placeholder="First Name"
-                                    pattern="[A-Za-z]{1,30}" 
+                                    pattern="[A-za-z'-]{1,30}" 
                                     onblur="validateName(name)"
                                     onkeydown="return /([A-za-z'-])/i.test(event.key)"
                                     title="This field only accepts alphabetic letters, apostrphes, and dashes."
@@ -95,7 +95,7 @@ Description: Base HTML file for the patient form.
                                     maxlength="30" 
                                     placeholder="Last Name"
                                     onblur="validateName(name)"
-                                    pattern="[A-Za-z]{1,30}" 
+                                    pattern="[A-Za-z'-]|[2-5]{1,30}" 
                                     onkeydown="return /([A-Za-z'-]|[2-5])/i.test(event.key)"
                                     title="This field only accepts alphabetic letters, numbers 2-5, apostrphes, and dashes."
                                 >
@@ -765,10 +765,10 @@ Description: Base HTML file for the patient form.
                                 <!-- Slider Bar -->
                                 <div class="form-element">
                                     <label for="sliderInput">Rate how you are feeling (1 - Very bad / 10 - Feeling Good)
-                                        <!-- <p>
+                                        <p>
                                             : 
                                             <output id="sliderValue"></output>
-                                        </p> -->
+                                        </p>
                                     </label>
                                     <input 
                                         type="range" 
