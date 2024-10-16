@@ -18,6 +18,7 @@ function validateName (fieldName) {
 // Validation for Emmail fields if empty
 function validateEmail (fieldName) {
     let email = document.forms["patient-form"][fieldName].value;
+    document.forms["patient-form"][fieldName].value = email.toLowerCase();
     let valildator = fieldName + "Validator";
 
     if (email.length < 1) {
