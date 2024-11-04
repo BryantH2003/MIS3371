@@ -208,5 +208,7 @@ function checkNumeric (character) {
 }
 
 function validateForm () {
-    
+    if (validateName("firstName") && validateName("lastName") && validateEmail("email") && validateUserID("userID") && validatePassword("password") && validateConfirmPassword("confirmPassword") && validateDate("birthDate") && validateZip("zipCode")) {
+        window.location.href = 'thank-you.html';
+    }
 }

@@ -68,7 +68,7 @@ Description: Base HTML file for the patient form.
                         <!-- Middle Intitial -->
                         <td>
                             <div class="form-element">
-                                <label for="firstName">Middle Initial</label>
+                                <label for="middleInit">Middle Initial</label>
                                 <input 
                                     type="text" 
                                     id="middleInit" 
@@ -749,7 +749,7 @@ Description: Base HTML file for the patient form.
                             <td>
                                 <!-- Describing symptom area -->
                                 <div class="form-element">
-                                    <label for="healtDescription">Describe any symptoms you may have </label>
+                                    <label for="healthDescription">Describe any symptoms you may have </label>
                                     <textarea 
                                         id="healthDescription" 
                                         name="healthDescription" 
@@ -803,7 +803,7 @@ Description: Base HTML file for the patient form.
                 <div class="form-row">
                     <input type="button" value="Review Data" onclick="viewData()">
                     <input type="reset" value="Clear Form">
-                    <input type="submit" value="Submit">
+                    <input type="submit" onsubmit="validateForm()" value="Submit">
                 </div>
             </form>
 
