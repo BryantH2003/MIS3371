@@ -11,6 +11,31 @@ Description: Base HTML file for the patient form.
     <!-- Loading form validation javascript -->
     <script src="form-validation.js"></script>
     <script src="review-data.js"></script>
+    <script src="cookies.js"></script>
+
+    <script>
+        window.onload = function () {
+            const userName = getCookie("firstName");
+            const header = document.getElementById("header");
+            const main = document.getElementById("main");
+            let greetingMessage = "";
+            console.log(userName);
+            if (userName) {
+              greetingMessage = `Welcome back, ${userName}!`;
+              const checkbox = document.createElement("div");
+              checkbox.innerHTML = `
+                  <label>
+                    <input type="checkbox" id="resetUser" onclick="clearForm()"> 
+                    Not ${userName}? Click HERE to start as a NEW USER.
+                  </label>`;
+              main.prepend(checkbox);
+            } else {
+              greetingMessage = "Welcome, New User!";
+            }
+          
+            header.textContent = greetingMessage;
+          };
+    </script>
     
     <head>
         <meta charset="utf-8">
@@ -31,13 +56,13 @@ Description: Base HTML file for the patient form.
             <div class="header-text">
                 <h1>Doctor Me'Ow's General Clinic</h1>
                 <p class="date"></p>
+                <p id="header"></p>
             </div>
-            <iframe src="google.com" title="Placeholder" width="300px" height="200px"></iframe>
         </div>
         
         <div class="main-content">
             <!--This is the main code for the patient form-->
-            <form id="patient-form" name="patient-form" action="thankyou.html" onsubmit="return validateForm()">
+            <form id="patient-form" name="patient-form" action="thankyou.html" onsubmit="return validateForm(event)">
 
                 <!-- This is the portion of the form responsible for Patient Information -->
                 <table>
@@ -427,7 +452,7 @@ Description: Base HTML file for the patient form.
                                     maxlength="10" 
                                     placeholder="Zip Code"
                                     title="Enter your zipcode."
-                                    pattern="[0-9]"
+                                    pattern="[0-9]{5}"
                                     onblur="validateZip()"
                                 >
                                 <div id="zipCodeValidator"></div>
@@ -800,6 +825,13 @@ Description: Base HTML file for the patient form.
                 </table>
 
                 <br>
+                
+                <div class="form-row">
+                    <label>
+                        <input type="checkbox" id="rememberMe" name="rememberMe" checked>
+                        Remember Me
+                    </label>
+                </div>
 
                 <div class="form-row">
                     <input type="button" value="Review Data" onclick="viewData()">
@@ -809,6 +841,11 @@ Description: Base HTML file for the patient form.
             </form>
 
             <div class="review-data-table" id="view-data"></div>
+
+            <div class="iframe-box">
+                <p>You will see this screen once you have successfully submitted your form.</p>
+                <iframe src="thank-you.html" title="Placeholder" width="200px" height="100px"></iframe>
+            </div>
         </div>
 
         <!-- Footer  -->
